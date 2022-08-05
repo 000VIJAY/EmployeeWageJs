@@ -27,6 +27,7 @@ function calcDailyWage(empHrs)
 let totalEmployeeHrs =0;
 let totalWorkingDays =0;
 let empDailyWageArr = new Array();
+let empDailyWageMap = new Map();
 while (totalWorkingDays < numOfWorkingDaysInMonth && totalEmployeeHrs <=maxWorkingHrsInMonth)
 {
     totalWorkingDays++
@@ -34,14 +35,15 @@ while (totalWorkingDays < numOfWorkingDaysInMonth && totalEmployeeHrs <=maxWorki
     let empHrs = getworkinghours(empCheck);
     totalEmployeeHrs +=empHrs;
     empDailyWageArr.push(calcDailyWage(empHrs));
+    empDailyWageMap.set(totalWorkingDays,calcDailyWage(empHrs));
 }
+console.log(empDailyWageMap);
 function totalWages(totalWage,dailyWage)
 {
     return totalWage + dailyWage;
 }
 let employeeWage = calcDailyWage(totalEmployeeHrs);
 console.log("Total days: "+totalWorkingDays + " Employee Hrs: " +totalEmployeeHrs+ " Employee Wage: "+employeeWage);
-console.log(empDailyWageArr);
 //Array Helper function
 //UC-7A foreach
 let totalEmpWage =0;
@@ -107,3 +109,5 @@ function numOfDaysEmpWorked(numOfDays,dailyWage)
 }
 let totalDays = empDailyWageArr.reduce(numOfDaysEmpWorked,0);
 console.log("Number of days employee worked in a month: "+totalDays);
+console.log("Emp Wage Map totalHrs: "+
+            Array.from(empDailyWageMap.values()).reduce(totalWages,0));
