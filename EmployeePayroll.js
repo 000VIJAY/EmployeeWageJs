@@ -1,7 +1,5 @@
 class EmployeeePayrollData
 {
-    id;
-    salary;
     constructor(...params)
     {
         this.id = params[0];
@@ -11,7 +9,12 @@ class EmployeeePayrollData
         this.startDate = params[4];
     }
         get gender() {return this._gender;}
-        set gender(gender){this._gender = gender;}
+        set gender(gender){
+            let genederRegex = RegExp('^[M,F]{1}');
+            if(genederRegex.test(gender))
+            {this._gender = gender;}
+            else{ throw 'Wrong input for gender';}
+            this._gender = gender;}
         get startDate() {return this._startDate;}
         set startDate(startDate) {this._startDate = startDate;}
         get name(){return this._name}
@@ -21,6 +24,25 @@ class EmployeeePayrollData
             this._name=name;
             else throw 'Name is incorrect';
         }
+        get salary(){return this._salary;}
+        set salary(salary){
+            let salaryValidate = RegExp('^[1-9]{1}[0-9]{1,6}$')
+            if(salaryValidate.test(salary))
+            {this._salary = salary;}
+            else{throw 'Wrong input';}
+        }
+        get  id(){return this._id;}
+        set id(id){
+            let idValidate = RegExp('^[1-90-9]{1,3}$')
+            if(idValidate.test(id))
+            {
+                this._id = id;
+            }
+            else
+            {
+                throw "Id is not valid kindly give valid id ";
+            }
+        }
 
     toString()
     {
@@ -29,9 +51,9 @@ class EmployeeePayrollData
         return "id = "+this.id+", name = "+this.name+", salary = "+this.salary +", Gender = "+this.gender+" , StartDate = "+empDate;  
     }
 }
-let employeePayrolldata = new EmployeeePayrollData(1,'Vijay',50000);
+let employeePayrolldata = new EmployeeePayrollData(10,'Vijay',50000,"M");
 console.log(employeePayrolldata.toString());
-let newEmployeePayrolldata = new EmployeeePayrollData(2,'Shiva',50000,"M",new Date());
+let newEmployeePayrolldata = new EmployeeePayrollData(2,'Shiva',550000,"M",new Date());
 console.log(newEmployeePayrolldata.toString());
 let newEmployeePayrolldataOne = new EmployeeePayrollData(3,'Praveen',60000,"M",new Date());
-console.log(newEmployeePayrolldata.toString());
+console.log(newEmployeePayrolldataOne.toString());
