@@ -1,22 +1,25 @@
 let isPartTime = 1;
-let isFullTime = 2;
+let isfullTime = 2;
 const partTimeWorkingHrPerDay = 4;
 const fullTimeWorkingHr = 8;
 const wagePerHr = 20;
-let empWage =0;
+function getworkinghours(empCheck)
+{
+    switch(empCheck)
+    {
+        case isPartTime:
+            console.log("Employee is part time");
+            return partTimeWorkingHrPerDay;
+        case isfullTime:
+            console.log("Employee is full time");
+            return fullTimeWorkingHr;
+        default:
+            console.log("Employee is absent")
+            return 0;
+    }   
+}
+let empHrs =0;
 let empCheck =  Math.floor(Math.random() * 10) % 3;
-if(empCheck==isFullTime)
-{ 
-      console.log("Employee is full time");
-      empWage = fullTimeWorkingHr * wagePerHr;
-}
-else if(empCheck===isPartTime)
-{
-    console.log("Employee is part time");
-    empWage = partTimeWorkingHrPerDay * wagePerHr;
-}
-else
-{
-    console.log("Employee is Absent");
-}
-console.log("Employee Wage per day: "+empWage);
+empHrs = getworkinghours(empCheck)
+let empWage = empHrs * wagePerHr;
+console.log("Emp Wage: "+empWage);
