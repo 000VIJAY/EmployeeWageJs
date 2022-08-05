@@ -20,14 +20,21 @@ function getworkinghours(empCheck)
             return 0;
     }   
 }
+function calcDailyWage(empHrs)
+{
+    return empHrs * wagePerHr;
+}
 let totalEmployeeHrs =0;
 let totalWorkingDays =0;
+let empDailyWageArr = new Array();
 while (totalWorkingDays < numOfWorkingDaysInMonth && totalEmployeeHrs <=maxWorkingHrsInMonth)
 {
     totalWorkingDays++
     let empCheck =  Math.floor(Math.random() * 10) % 3;
     let empHrs = getworkinghours(empCheck);
     totalEmployeeHrs +=empHrs;
+    empDailyWageArr.push(calcDailyWage(empHrs));
 }
-let employeeWage = totalEmployeeHrs * wagePerHr;
+let employeeWage = calcDailyWage(totalEmployeeHrs);
 console.log("Total days: "+totalWorkingDays + " Employee Hrs: " +totalEmployeeHrs+ " Employee Wage: "+employeeWage);
+console.log(empDailyWageArr);
